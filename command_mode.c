@@ -1634,6 +1634,31 @@ static void cmd_win_sel_cur(char *arg)
 	editable_unlock();
 }
 
+static void cmd_win_set_sel(char *arg)
+{
+editable_lock();
+switch (cur_view) {
+case TREE_VIEW:
+tree_set_selected();
+break;
+case SORTED_VIEW:
+sorted_set_selected();
+break;
+case PLAYLIST_VIEW:
+pl_set_selected();
+break;
+case QUEUE_VIEW:
+break;
+case BROWSER_VIEW:
+break;
+case FILTERS_VIEW:
+break;
+case HELP_VIEW:
+break;
+}
+editable_unlock();
+}
+
 static void cmd_win_toggle(char *arg)
 {
 	switch (cur_view) {
@@ -2493,6 +2518,7 @@ struct command commands[] = {
 	{ "win-page-up",	cmd_win_pg_up,	0, 0, NULL,		  0, 0 },
 	{ "win-remove",		cmd_win_remove,	0, 0, NULL,		  0, CMD_UNSAFE },
 	{ "win-sel-cur",	cmd_win_sel_cur,0, 0, NULL,		  0, 0 },
+	{ "win-set-sel",	cmd_win_set_sel,0, 0, NULL,               0, 0 },
 	{ "win-toggle",		cmd_win_toggle,	0, 0, NULL,		  0, 0 },
 	{ "win-top",		cmd_win_top,	0, 0, NULL,		  0, 0 },
 	{ "win-up",		cmd_win_up,	0, 0, NULL,		  0, 0 },
